@@ -1,0 +1,125 @@
+:root {
+    --dark-grey: #222222;
+    --lighter-grey: #323232;
+    --lightest-grey: #6e6e6e;   
+}
+
+/* General classes */
+
+.display-flex {
+    display:flex;
+}
+
+.justify-content-space-between {
+    justify-content: space-between;
+}
+
+/*******************/
+
+::selection {
+    background:var(--lightest-grey);
+}
+
+body {
+    color: white;
+    background: var(--dark-grey);
+    font-family:'Ubuntu', Helvetica;
+    font-size: 16px;
+}
+
+button {
+    font-family:'Ubuntu';
+    cursor: pointer;
+}
+
+#message-body {
+    width: calc(100% - 7px);
+    height:300px;
+    font-family:monospace;
+    outline:none;
+}
+
+.under-message-body-items {
+    margin-top:10px;
+    align-items: flex-start;
+}
+
+#message-composer-layout {
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+    width:80%;
+    max-width: 1200px;
+}
+
+.message-actions {
+    display:block;
+    margin-left:auto;
+    width: fit-content;
+}
+
+#copy-text-btn {
+    background: #0c0c0c;
+}
+
+#copy-text-btn:hover {
+    opacity: 0.7;
+}
+
+.btn {
+    background: #0c0c0c;
+    outline: none;
+    border: 0px solid transparent;
+    color: white;
+    padding: 8px 16px;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+}
+
+.btn:hover {
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+textarea {
+    color:white;
+    background: var(--lighter-grey);
+}
+
+#available-keys {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 20px;
+    max-width: 760px;
+}
+
+#available-keys .special-char {
+    border: 2px solid var(--lightest-grey);
+    cursor: pointer;
+    line-height: 1em;
+    display: flex;
+    text-align: center;
+    font-weight: 300;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    transition:background 0.2s ease;
+}
+
+#available-keys .special-char:hover {
+    background:var(--lighter-grey);
+    transition:background 0.2s ease;
+}
+
+.is-capitalized {
+    text-transform: uppercase;
+}
+
+.last-saved-notice {
+    font-size: 0.84em;
+    opacity: 0.9;
+    font-weight: 300;
+}
