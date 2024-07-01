@@ -2,7 +2,9 @@ import {
     addClassToElementsArray,
     removeClassFromElementsArray,
     saveLastMessage,
-    getLastMessage
+    getLastMessage,
+    isEmoji,
+    convertTextToUnicode
 } from './utils.js';
 
 import { MessageBodyController } from './controllers/MessageBodyController.js'
@@ -23,6 +25,7 @@ document.addEventListener ('DOMContentLoaded', () =>
         {
             message_body.insertCharacterInTextareaCaretPosition (special_chars[i].textContent);
             message_body_textarea.focus ();
+            //console.log (convertTextToUnicode (message_body_textarea.value));
         });
     }
 
@@ -54,5 +57,11 @@ document.addEventListener ('DOMContentLoaded', () =>
     { 
         saveLastMessage (message_body_textarea.value);
         last_saved_notice.innerHTML = "Last saved at " + String (new Date ());
-    }, 60000)
+    }, 60000);
+
+    setInterval (() => 
+    {
+        console.log (message_body.debug_data);
+        console.log (convertTextToUnicode (message_body_textarea.value));
+    }, 1000);
 });
