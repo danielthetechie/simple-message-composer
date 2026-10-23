@@ -8,26 +8,35 @@ import {
 } from './utils.js';
 
 import { MessageBodyController } from './controllers/MessageBodyController.js'
+import { setupEmojiKeys, filterEmojiKeys } from './emojiKeys.js';
 
 document.addEventListener ('DOMContentLoaded', () => 
 {
     const special_chars = document.getElementsByClassName ("special-char");
     const message_body_textarea = document.getElementById ("message-body");
+    const available_keys = document.getElementById ("available-keys");
+    const emoji_search = document.getElementById ("emoji-search");
 
     let last_saved_message = getLastMessage ();
 
     const message_body = new MessageBodyController (message_body_textarea, last_saved_message);
 
-    /* Actions for visual keyboard */
-    for (let i = 0; i < special_chars.length; i++)
+    setupEmojiKeys (available_keys);
+
+    emoji_search.addEventListener ('input', e => 
     {
-        special_chars[i].addEventListener ('click', e => 
-        {
-            message_body.insertCharacterInTextareaCaretPosition (special_chars[i].textContent);
-            message_body_textarea.focus ();
-            //console.log (convertTextToUnicode (message_body_textarea.value));
-        });
-    }
+        filterEmojiKeys (available_keys, emoji_search.value);
+    });
+
+    /* Actions for visual keyboard */
+    available_keys.addEventListener ('click', e => 
+    {
+        const key = e.target.closest (".special-char");
+        if (key === null) return;
+
+        message_body.insertCharacterInTextareaCaretPosition (key.textContent);
+        message_body_textarea.focus ();
+    });
 
     document.addEventListener ('keydown', e => 
     {
@@ -42,6 +51,12 @@ document.addEventListener ('DOMContentLoaded', () =>
                 addClassToElementsArray ("is-capitalized", special_chars);
             }
         }
+    });
+
+    const copy_btn = document.getElementById ("copy-text-btn");
+    copy_btn.addEventListener ('click', e => 
+    {
+        navigator.clipboard.writeText (message_body.getMessageBodyContent ());
     });
 
     const save_btn = document.getElementById ("save-text-btn");
@@ -59,9 +74,4 @@ document.addEventListener ('DOMContentLoaded', () =>
         last_saved_notice.innerHTML = "Last saved at " + String (new Date ());
     }, 60000);
 
-    setInterval (() => 
-    {
-        console.log (message_body.debug_data);
-        console.log (convertTextToUnicode (message_body_textarea.value));
-    }, 1000);
 });

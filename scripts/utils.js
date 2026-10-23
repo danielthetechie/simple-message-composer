@@ -7,6 +7,7 @@
     saveLastMessage
     getLastMessage
     isEmoji
+    normalizeText
  */
 
 function addClassToElementsArray (class_name, elements_array)
@@ -67,6 +68,11 @@ function convertTextToUnicode (text)
     return unicode_text;
 }
 
+function normalizeText (text)
+{
+    return text.normalize ('NFD').replace (/[\u0300-\u036f]/g, '').toLowerCase ();
+}
+
 function getCharTimesInText (char, text)
 {
     let char_count = 0;
@@ -111,5 +117,6 @@ export {
     isEmoji,
     convertTextToUnicode,
     getCharTimesInText,
-    getNumberOfEmojisInText
+    getNumberOfEmojisInText,
+    normalizeText
 }

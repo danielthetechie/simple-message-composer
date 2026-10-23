@@ -32,9 +32,14 @@ button {
     cursor: pointer;
 }
 
+.reply-mode {
+    display:flex;
+    column-gap:5px;
+}
+
 #message-body {
-    width: calc(100% - 7px);
-    height:300px;
+    /*width: calc(100% - 7px);*/
+    height:450px;
     font-family:monospace;
     outline:none;
 }
@@ -48,8 +53,8 @@ button {
     display:block;
     margin-left:auto;
     margin-right:auto;
-    width:80%;
-    max-width: 1200px;
+    width:90%;
+    max-width: 1300px;
 }
 
 .message-actions {
@@ -82,16 +87,34 @@ button {
 }
 
 textarea {
+    width:50%;
     color:white;
     background: var(--lighter-grey);
+}
+
+#emoji-search {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 760px;
+    margin-top: 20px;
+    padding: 8px 12px;
+    color: white;
+    background: var(--lighter-grey);
+    border: 2px solid var(--lightest-grey);
+    border-radius: 5px;
+    font-family: 'Ubuntu', Helvetica;
+    outline: none;
 }
 
 #available-keys {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    margin-top: 20px;
-    max-width: 760px;
+    margin-top: 10px;
+    max-width: 100%;
+    max-height: 340px;
+    overflow-y: auto;
 }
 
 #available-keys .special-char {
@@ -112,6 +135,10 @@ textarea {
 #available-keys .special-char:hover {
     background:var(--lighter-grey);
     transition:background 0.2s ease;
+}
+
+.is-filtered-out {
+    display: none !important;
 }
 
 .is-capitalized {
